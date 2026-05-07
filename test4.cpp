@@ -126,3 +126,10 @@ int main() {
 
     return 0;
 }
+int maxDepth;
+    cout << "\nEnter maximum recursion tree depth to print: ";
+    cin >> maxDepth;
+    cout << "Recursion indentation tree:" << endl;
+    printIndentationTree(0, maxDepth);
+
+    return 0;
