@@ -112,24 +112,3 @@ int main() {
 
     if (depth < 0) {
         cout << "Depth must be non-negative." << endl;
-    } else {
-        int nestedResult = nestedRecursion(1, depth);
-        cout << "Nested recursion result starting from 1 at depth "
-             << depth << " is " << nestedResult << "." << endl;
-    }
-
-    int maxDepth;
-    cout << "\nEnter maximum recursion tree depth to print: ";
-    cin >> maxDepth;
-    cout << "Recursion indentation tree:" << endl;
-    printIndentationTree(0, maxDepth);
-
-    return 0;
-}
-int maxDepth;
-    cout << "\nEnter maximum recursion tree depth to print: ";
-    cin >> maxDepth;
-    cout << "Recursion indentation tree:" << endl;
-    printIndentationTree(0, maxDepth);
-
-    return 0;

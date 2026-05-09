@@ -25,8 +25,4 @@ int main() {
     for(int i = 0; i < k; i++) {
         int x;
         cin >> x;
-        sum += x;
-    }
-    cout << sum << endl;
-    return 0;
-}
+        
