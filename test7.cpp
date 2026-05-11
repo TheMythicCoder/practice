@@ -68,11 +68,3 @@ private:
         return m;
     }
 };
-
-int main() {
-    Matrix m1(3, 3);
-    m1.fill(1.5);
-    
-    cout << "Matrix operations completed successfully!" << endl;
-    return 0;
-}
