@@ -110,5 +110,3 @@ int main() {
     cout << "\nEnter recursion depth for nested evaluation: ";
     cin >> depth;
 
-    if (depth < 0) {
-        cout << "Depth must be non-negative." << endl;

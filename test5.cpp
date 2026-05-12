@@ -20,14 +20,6 @@ int main() {
         for (int i = 0; i < n; ++i)
             cin >> v[i];
 
-        int m;
-        cin >> m;
-        vector<int> arr(m);
-        for (int i = 0; i < m; ++i)
-            cin >> arr[i];
-
-        string s;
-        cin >> s;
 
         int R, C;
         cin >> R >> C;
