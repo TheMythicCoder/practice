@@ -1,13 +1,23 @@
-#include <iostream>
-#include <vector>
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;ctime&gt;
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 100);
-    std::vector<int> v;
-    for(int i = 0; i < 10; i++) v.push_back(dis(gen));
-    std::sort(v.begin(), v.end(), std::greater<int>());
-    for(int i : v) std::cout << i << " ";
-    std::cout << std::endl;
+using namespace std;
+
+int main() {
+    srand(time(0));
+    cout &lt;&lt; "Random numbers:" &lt;&lt; endl;
+    for(int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; rand() % 100 &lt;&lt; endl;
+    }
+    cout &lt;&lt; "Another set:" &lt;&lt; endl;
+    for(int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; rand() % 100 &lt;&lt; endl;
+    }
+    cout &lt;&lt; "More random:" &lt;&lt; endl;
+    for(int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; rand() % 100 &lt;&lt; endl;
+    }
+    cout &lt;&lt; "End of random code." &lt;&lt; endl;
     return 0;
 }
