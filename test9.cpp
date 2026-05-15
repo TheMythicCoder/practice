@@ -1,32 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int roll(int a, int b) {
+    return a + rand() % (b - a + 1);
+}
+
+string random_word(int len) {
+    static const char* src = "abcdefghijklmnopqrstuvwxyz";
+    string s; s.reserve(len);
+    for (int i = 0; i < len; ++i) s.push_back(src[rand() % 26]);
+    return s;
+}
+
 int main() {
-    srand((unsigned)time(NULL));
-    int n = 10;
-    vector<int> a(n);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    srand((unsigned)time(nullptr));
 
-    for (int i = 0; i < n; i++) {
-        a[i] = rand() % 20 + 1;
+    for (int i = 0; i < 30; ++i) {
+        int a = roll(1, 100);
+        int b = roll(101, 1000);
+        string w = random_word(1 + rand() % 8);
+        cout << i << ": " << w << " " << a << "," << b << "\n";
     }
-
-    vector<int> dp(n, 1);
-    int lis = 1;
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < i; j++) {
-            if (a[j] < a[i]) {
-                dp[i] = max(dp[i], dp[j] + 1);
-            }
-        }
-        lis = max(lis, dp[i]);
-    }
-
-    cout << "Random array:";
-    for (int x : a) {
-        cout << " " << x;
-    }
-    cout << "\nLongest increasing subsequence length: " << lis << "\n";
 
     return 0;
 }
