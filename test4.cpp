@@ -1,112 +1,46 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 
+#include <bits/stdc++.h>
 using namespace std;
 
-void readNumbersRecursively(vector<int> &numbers, int index) {
-    if (index < 0) {
-        return;
-    }
-    cout << "Enter number " << index + 1 << ": ";
-    cin >> numbers[index];
-    readNumbersRecursively(numbers, index - 1);
-}
+// Backtracking + DP (memoization) example:
+// Count number of subsets that sum to a given target.
 
-void findSubsetSums(const vector<int> &numbers, int target, int index, 
-                    vector<int> &current, vector<vector<int>> &solutions) {
-    if (index == (int)numbers.size()) {
-        int sum = 0;
-        for (int value : current) {
-            sum += value;
-        }
-        if (sum == target) {
-            solutions.push_back(current);
-        }
-        return;
-    }
+long long dfs(int i, int sum, const vector<int>& a, int target, vector<unordered_map<int,long long>>& memo) {
+	if (sum == target) return 1;
+	if (i == (int)a.size()) return 0;
+	if (sum > target) return 0; // assuming non-negative numbers
+	auto it = memo[i].find(sum);
+	if (it != memo[i].end()) return it->second;
 
-    // Exclude the current number
-    findSubsetSums(numbers, target, index + 1, current, solutions);
+	// choice: skip current
+	long long ways = dfs(i+1, sum, a, target, memo);
+	// choice: take current
+	ways += dfs(i+1, sum + a[i], a, target, memo);
 
-    // Include the current number
-    current.push_back(numbers[index]);
-    findSubsetSums(numbers, target, index + 1, current, solutions);
-    current.pop_back();
-}
-
-bool isPalindromeRecursively(const string &text, int left, int right) {
-    if (left >= right) {
-        return true;
-    }
-    if (text[left] != text[right]) {
-        return false;
-    }
-    return isPalindromeRecursively(text, left + 1, right - 1);
-}
-
-int nestedRecursion(int value, int depth) {
-    if (depth == 0) {
-        return value;
-    }
-    return nestedRecursion(nestedRecursion(value + 1, depth - 1), depth - 1);
-}
-
-void printIndentationTree(int depth, int maxDepth) {
-    if (depth > maxDepth) {
-        return;
-    }
-    for (int i = 0; i < depth; ++i) {
-        cout << "  ";
-    }
-    cout << "Recursion depth " << depth << "\n";
-    printIndentationTree(depth + 1, maxDepth);
+	memo[i][sum] = ways;
+	return ways;
 }
 
 int main() {
-    int count;
-    cout << "Enter how many numbers to provide: ";
-    cin >> count;
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
 
-    if (count <= 0) {
-        cout << "Number of values must be positive." << endl;
-        return 0;
-    }
+	int n; long long target;
+	if (!(cin >> n >> target)) {
+		// Example: if no input, run demo
+		vector<int> a = {2,3,5,6,8,10};
+		target = 10; n = a.size();
+		vector<unordered_map<int,long long>> memo(n);
+		cout << dfs(0, 0, a, target, memo) << '\n';
+		return 0;
+	}
 
-    vector<int> numbers(count);
-    readNumbersRecursively(numbers, count - 1);
+	vector<int> a(n);
+	for (int i = 0; i < n; ++i) cin >> a[i];
 
-    int target;
-    cout << "Enter a target sum to search for: ";
-    cin >> target;
-
-    vector<vector<int>> solutions;
-    vector<int> current;
-    findSubsetSums(numbers, target, 0, current, solutions);
-
-    cout << "\nSubsets that sum to " << target << ":" << endl;
-    if (solutions.empty()) {
-        cout << "  None found." << endl;
-    } else {
-        for (const auto &subset : solutions) {
-            cout << "  { ";
-            for (int value : subset) {
-                cout << value << " ";
-            }
-            cout << "}\n";
-        }
-    }
-
-    string text;
-    cout << "\nEnter a string to check for palindrome: ";
-    cin >> text;
-
-    bool palindrome = isPalindromeRecursively(text, 0, (int)text.size() - 1);
-    cout << "The string '" << text << "' is "
-         << (palindrome ? "a palindrome." : "not a palindrome.") << endl;
-
-    int depth;
-    cout << "\nEnter recursion depth for nested evaluation: ";
-    cin >> depth;
+	// This memoization assumes sums are non-negative and not too large.
+	vector<unordered_map<int,long long>> memo(n);
+	cout << dfs(0, 0, a, (int)target, memo) << '\n';
+	return 0;
+}
 
