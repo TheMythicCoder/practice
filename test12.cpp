@@ -1,23 +1,25 @@
 #include <iostream>
 #include <vector>
+using namespace std;
+
+void printVector(const vector<int>& v) {
+	cout << "Vector elements: ";
+	for (int num : v) {
+		cout << num << " ";
+	}
+	cout << endl;
+}
 
 int main() {
-    std::vector<int> arr = {5, 2, 9, 1, 5, 6};
-    int n = static_cast<int>(arr.size());
-
-    for (int i = 0; i < n - 1; ++i) {
-        for (int j = 0; j < n - i - 1; ++j) {
-            if (arr[j] > arr[j + 1]) {
-                std::swap(arr[j], arr[j + 1]);
-            }
-        }
-    }
-
-    std::cout << "Sorted array: ";
-    for (int value : arr) {
-        std::cout << value << " ";
-    }
-    std::cout << std::endl;
-
-    return 0;
+	vector<int> numbers;
+	for (int i = 1; i <= 5; ++i) {
+		numbers.push_back(i * 2);
+	}
+	printVector(numbers);
+	int sum = 0;
+	for (int num : numbers) {
+		sum += num;
+	}
+	cout << "Sum: " << sum << endl;
+	return 0;
 }
