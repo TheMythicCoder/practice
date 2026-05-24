@@ -1,11 +1,25 @@
-// Simple 10-line C++ program
 #include <iostream>
-using namespace std;
+#include <unordered_map>
 
 int main() {
-	int a = 5;
-	int b = 10;
-	int sum = a + b;
-	cout << "Sum: " << sum << endl;
+	std::unordered_map<int, int> numMap;
+	// Insert elements
+	numMap[1] = 100;
+	numMap[2] = 200;
+	numMap[3] = 300;
+
+	// Iterate and print
+	for (const auto& pair : numMap) {
+		std::cout << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
+	}
+
+	// Find an element
+	int key = 2;
+	if (numMap.find(key) != numMap.end()) {
+		std::cout << "Found key " << key << ": " << numMap[key] << std::endl;
+	} else {
+		std::cout << "Key " << key << " not found." << std::endl;
+	}
+
 	return 0;
 }
