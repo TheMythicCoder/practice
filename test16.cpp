@@ -8,7 +8,7 @@ int main() {
 	// Insert elements
 	ageMap["Alic"] = 30;
 	ageMap["Bob"] = 25;
-	ageMap["Charlie"] = 35;
+	ageMap["Charly"] = 35;
 
 	// Access and print elements
 	for (const auto& pair : ageMap) {
