@@ -6,7 +6,7 @@ int main() {
 	std::map<std::string, int> ageMap;
 
 	// Insert elements
-	ageMap["Alice"] = 30;
+	ageMap["Alic"] = 30;
 	ageMap["Bob"] = 25;
 	ageMap["Charlie"] = 35;
 
