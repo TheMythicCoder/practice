@@ -1,8 +1,7 @@
 #include <iostream>
-#include <vector>
 #include <cstdlib>
 #include <ctime>
-#include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -10,29 +9,24 @@ int main() {
     srand(time(0));
     
     vector<int> numbers;
+    
     for (int i = 0; i < 10; i++) {
-        numbers.push_back(rand() % 100 + 1);
+        numbers.push_back(rand() % 100);
     }
     
-    cout << "Original array: ";
+    cout << "Random numbers generated:\n";
     for (int num : numbers) {
         cout << num << " ";
     }
-    cout << endl;
-    
-    sort(numbers.begin(), numbers.end());
-    
-    cout << "Sorted array: ";
-    for (int num : numbers) {
-        cout << num << " ";
-    }
-    cout << endl;
+    cout << "\n";
     
     int sum = 0;
     for (int num : numbers) {
         sum += num;
     }
-    cout << "Sum: " << sum << endl;
+    
+    cout << "Sum: " << sum << "\n";
+    cout << "Average: " << (sum / 10.0) << "\n";
     
     return 0;
 }
