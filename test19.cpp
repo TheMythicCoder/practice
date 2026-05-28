@@ -1,48 +1,65 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <random>
+#include <vector>
+
 using namespace std;
 
-const int MAXN = 100005;
-vector<int> adj[MAXN];
-long long dp[MAXN][2];
-
-// Tree DP Example: Maximum weight independent set
-void dfs(int u, int parent) {
-    dp[u][0] = 0;  // dp[u][0] = max sum when u is NOT selected
-    dp[u][1] = 0;  // dp[u][1] = max sum when u IS selected
+struct TreeNode {
+    string value;
+    vector<TreeNode*> children;
     
-    for (int v : adj[u]) {
-        if (v == parent) continue;
-        
-        dfs(v, u);
-        
-        // If u is not selected, we can select or not select child v
-        dp[u][0] += max(dp[v][0], dp[v][1]);
-        
-        // If u is selected, child v cannot be selected
-        dp[u][1] += dp[v][0];
+    TreeNode(string val) : value(val) {}
+};
+
+string generateRandomString(int length) {
+    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(0, chars.size() - 1);
+    
+    string result;
+    for (int i = 0; i < length; ++i) {
+        result += chars[dis(gen)];
+    }
+    return result;
+}
+
+TreeNode* buildRandomTree(int depth, int maxChildren) {
+    if (depth == 0) return nullptr;
+    
+    TreeNode* root = new TreeNode(generateRandomString(5));
+    
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, maxChildren);
+    
+    int numChildren = dis(gen);
+    for (int i = 0; i < numChildren; ++i) {
+        TreeNode* child = buildRandomTree(depth - 1, maxChildren);
+        if (child) {
+            root->children.push_back(child);
+        }
     }
     
-    // If u is selected, add its weight (assumed 1 here)
-    dp[u][1] += 1;
+    return root;
+}
+
+void printTree(TreeNode* node, int indent = 0) {
+    if (!node) return;
+    
+    for (int i = 0; i < indent; ++i) cout << "  ";
+    cout << node->value << "\n";
+    
+    for (TreeNode* child : node->children) {
+        printTree(child, indent + 1);
+    }
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int n;
-    cin >> n;
-    
-    for (int i = 0; i < n - 1; i++) {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-    
-    dfs(1, -1);
-    
-    cout << max(dp[1][0], dp[1][1]) << "\n";
+    TreeNode* tree = buildRandomTree(3, 3);
+    cout << "Random Tree Structure:\n";
+    printTree(tree);
     
     return 0;
 }
