@@ -18,7 +18,7 @@ int main() {
     // Print original numbers
     cout << "Original numbers: ";
     for (int num : numbers) {
-        cout << num << " ";
+        cout << num << " " << "boomerang";
     }
     cout << endl;
     
@@ -31,6 +31,5 @@ int main() {
         cout << num << " ";
     }
     cout << endl;
-    
     return 0;
 }
