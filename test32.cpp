@@ -170,6 +170,7 @@ int main()
             }
         }
     }
+    //skskc
     printValues("Primes:", primes);
     vector<string> words;
     for (int i = 0; i < 5; ++i)
